@@ -31,20 +31,17 @@ pip install numpy matplotlib scikit-image imutils
 brew install cmake pkg-config jpeg libpng libtiff openexr eigen tbb
 
 mkdir ~/opencv
-cd ~/opencv
-git clone https://github.com/opencv/opencv
-cd opencv 
-git checkout 3.2.0
-cd ..
+wget https://github.com/opencv/opencv/archive/3.2.0.zip
+unzip 3.2.0.zip 
+wget https://github.com/opencv/opencv_contrib/archive/3.2.0.zip
+unzip 3.2.0.zip.1
 
-git clone https://github.com/opencv/opencv_contrib
-cd opencv_contrib
-git checkout 3.2.0
-cd ..
+mkidr opencv-3.2.0/build
+cd opencv-3.2.0/build
 
-mkidr opencv/build
-cd opencv/build
-cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=~/opencv/opencv_contrib/modules \
+# fix: http://answers.opencv.org/question/121587/undefined-freetype-symbols-when-building-opencv-320/
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=~/opencv/opencv_contrib-3.2.0/modules \
     -D PYTHON3_LIBRARY=/usr/local/Cellar/python3/3.6.0/Frameworks/Python.framework/Versions/3.6/lib/python3.6/config-3.6m-darwin/libpython3.6.dylib \
     -D PYTHON3_INCLUDE_DIR=/usr/local/Cellar/python3/3.6.0/Frameworks/Python.framework/Versions/3.6/include/python3.6m/ \
     -D PYTHON3_EXECUTABLE=$VIRTUAL_ENV/bin/python \
